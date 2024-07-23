@@ -59,7 +59,7 @@ export const actualizarUsuario = async(p:Usuario)=>{
     await updateDoc(ref,{...p})
 }
 
-export const eliminarPersona = async(p:Usuario)=>{
+export const eliminarUsuario = async(p:Usuario)=>{
     try{
         if (!p.key) {
             throw new Error("Te equivocaste pibe");
