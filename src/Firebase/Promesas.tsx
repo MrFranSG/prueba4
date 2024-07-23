@@ -1,5 +1,5 @@
 import { Usuario } from "@/Interfaces/IUsuario";
-import { addDoc, collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "./Firebase";
 
 
@@ -59,7 +59,15 @@ export const actualizarUsuario = async(p:Usuario)=>{
     await updateDoc(ref,{...p})
 }
 
-
-
-
-
+export const eliminarPersona = async(p:Usuario)=>{
+    try{
+        if (!p.key) {
+            throw new Error("Te equivocaste pibe");
+          }
+        const ref = doc(db,"usuarios",p.key);
+        await deleteDoc(ref);
+        console.log("listo");
+    } catch(error){
+        console.log("error",error);
+    }
+}
