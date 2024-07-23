@@ -1,5 +1,5 @@
 import { obtenerUsuarios, eliminarUsuario } from '@/Firebase/Promesas'
-import { Usuario } from '@/Interfaces/IUsuario'
+import {  Usuario } from '@/Interfaces/IUsuario'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Modal, Nav, Navbar, Table } from 'react-bootstrap'
@@ -11,6 +11,8 @@ import { MdDelete } from "react-icons/md";
 
 export const Mostrar = () => {
     const [usuarios,setUsuarios] = useState<Usuario[]>([])
+    const [show, setShow] = useState(false);
+    const [selectedUsuario, setSelectedUsuario] = useState<Usuario | null>(null);
     useEffect(()=>{
         obtenerUsuarios().then((usuarios)=>{
             setUsuarios(usuarios)
@@ -20,14 +22,6 @@ export const Mostrar = () => {
         })
     },[])
 
-
-
-
-
-    const handleEliminar = async () => {
-        const [show, setShow] = useState(false);
-        const [selectedUsuario, setSelectedUsuario] = useState<Usuario | null>(null);
-
         const handleClose = () => setShow(false);
         const handleShow = (usuario: Usuario) => {
             setSelectedUsuario(usuario);
@@ -36,6 +30,9 @@ export const Mostrar = () => {
 
 
 
+
+
+    const handleEliminar = async () => {
         if (selectedUsuario) {
           try {
             await eliminarUsuario(selectedUsuario);
@@ -54,7 +51,7 @@ export const Mostrar = () => {
 
         <Navbar bg="primary" variant="dark">
                     <Container>
-                        <Navbar.Brand as={Link} href="https://store.steampowered.com/?l=spanish" ><FaSteam />Steam</Navbar.Brand>
+                        <Navbar.Brand as={Link} href="/" ><FaSteam />Steam</Navbar.Brand>
                         <Nav className="Registro">
                             <Nav.Link as={Link} href="/Registro"><FaUserPlus />Registro</Nav.Link>
                             <Nav.Link as={Link} href="/Mostrar"><FaUser />Usuarios</Nav.Link>

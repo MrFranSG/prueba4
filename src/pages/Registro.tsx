@@ -163,7 +163,7 @@ export const Registro = () => {
 
         <Navbar bg="primary" variant="dark">
             <Container>
-                <Navbar.Brand as={Link} href="https://store.steampowered.com/?l=spanish" ><FaSteam />Steam</Navbar.Brand>
+                <Navbar.Brand as={Link} href="/" ><FaSteam />Steam</Navbar.Brand>
                 <Nav className="Registro">
                     <Nav.Link as={Link} href="/Registro"><FaUserPlus />Registro</Nav.Link>
                     <Nav.Link as={Link} href="/Mostrar"><FaUser />Usuarios</Nav.Link>

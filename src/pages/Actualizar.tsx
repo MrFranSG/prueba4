@@ -1,8 +1,11 @@
 import { actualizarUsuario, obtenerUsuario } from '@/Firebase/Promesas'
 import { Usuario } from '@/Interfaces/IUsuario'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap'
+import { FaSteam, FaUser, FaUserPlus } from 'react-icons/fa'
+import { IoMdLogIn } from 'react-icons/io'
 
 
 
@@ -28,19 +31,21 @@ export const Actualizar = () => {
 
     useEffect(()=>{
         const key = router.query.key;
-        if(key!=undefined && typeof(key)=="string"){
+        if(key!=undefined && typeof(key)==="string"){
             obtenerUsuario(key).then((p)=>{
                 if(p!=undefined){
                     setUsuario(p)
                 }
                 else{
+                    router.push("/Mostrar")
 
                 }
             })
         }else{
+            router.push("/Mostrar")
 
         }
-    },[])
+    },[router.query.key])
 
     const Modificar = ()=>{
         actualizarUsuario(usuario).then(()=>{
@@ -51,6 +56,20 @@ export const Actualizar = () => {
 
     return (
         <>
+
+        <Navbar bg="primary" variant="dark">
+                    <Container>
+                        <Navbar.Brand as={Link} href="https://store.steampowered.com/?l=spanish" ><FaSteam />Steam</Navbar.Brand>
+                        <Nav className="Registro">
+                            <Nav.Link as={Link} href="/Registro"><FaUserPlus />Registro</Nav.Link>
+                            <Nav.Link as={Link} href="/Mostrar"><FaUser />Usuarios</Nav.Link>
+                            <Nav.Link as={Link} href="/"><IoMdLogIn />Login</Nav.Link>
+                        </Nav>
+
+                    </Container>
+
+        </Navbar>
+
         <Form>
             <Form.Group>
                 <Form.Label>Nombre: </Form.Label>
@@ -110,7 +129,7 @@ export const Actualizar = () => {
 
             <Form.Group>
                 <Form.Label>Comentario</Form.Label>
-                <Form.Control as='textarea' rows={3} placeholder="Pon un comentario" name="Comentario" onChange={(e)=>{handleUsuario(e.currentTarget.name,e.currentTarget.value)}}  />
+                <Form.Control as='textarea' rows={3} placeholder="Pon un comentario" value={usuario.Comentario} name="Comentario" onChange={(e)=>{handleUsuario(e.currentTarget.name,e.currentTarget.value)}}  />
             </Form.Group>
 
             <Button type="button" variant='primary' onClick={Modificar}>Actualizar</Button>

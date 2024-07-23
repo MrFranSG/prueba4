@@ -55,7 +55,7 @@ export const obtenerUsuario = async (key:string)=>{
 }
 
 export const actualizarUsuario = async(p:Usuario)=>{
-    const ref = doc(collection(db,"Usuarios",p.key!))
+    const ref = doc(db,"Usuarios",p.key!)
     await updateDoc(ref,{...p})
 }
 
@@ -64,7 +64,7 @@ export const eliminarUsuario = async(p:Usuario)=>{
         if (!p.key) {
             throw new Error("Te equivocaste pibe");
           }
-        const ref = doc(db,"usuarios",p.key);
+        const ref = doc(db,"Usuarios",p.key);
         await deleteDoc(ref);
         console.log("listo");
     } catch(error){
