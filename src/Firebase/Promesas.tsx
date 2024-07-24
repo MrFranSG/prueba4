@@ -1,5 +1,5 @@
 import { Usuario } from "@/Interfaces/IUsuario";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from "./Firebase";
 
 
@@ -8,6 +8,25 @@ export const registrarUsuario = async(usuario:Usuario)=>{
     const docRef = await addDoc(collection(db,"Usuarios"), usuario);
     
 }
+
+
+export const login = async (correo: string, contraseña: string) => {
+    const q = query(
+        collection(db, "Usuarios"),
+        where("correo", "==", correo),
+        where("contraseña", "==", contraseña)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+        return Promise.reject(new Error("Correo o contraseña incorrectos."));
+    }
+
+    return { success: true };
+};
+
+
 
 export const obtenerUsuarios = async()=>{
     let usuarios:Usuario[] = []

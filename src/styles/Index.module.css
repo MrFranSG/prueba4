@@ -1,0 +1,41 @@
+
+.navbar {
+    background-color: #171a21;
+  }
+  
+  .navbarBrand {
+    color: #c7d5e0;
+  }
+  
+  .navLink {
+    color: #c7d5e0;
+  }
+  
+  .navLink:hover {
+    color: #66c0f4;
+  }
+  
+  .mainContent {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .buttonsContainer {
+    margin-bottom: 2rem;
+  }
+  
+  .mainButton {
+    margin: 0 0.5rem;
+  }
+  
+  .imageContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .imageContainer img {
+    border-radius: var(--border-radius);
+  }
+  

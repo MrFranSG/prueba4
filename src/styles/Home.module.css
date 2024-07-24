@@ -25,6 +25,10 @@
   gap: 0.5rem;
 }
 
+.formControl::placeholder {
+  color: #ffffff;
+}
+
 .description p {
   position: relative;
   margin: 0;
