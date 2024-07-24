@@ -9,6 +9,8 @@ import { FaSteam, FaUser, FaUserPlus } from "react-icons/fa";
 import { useRouter } from "next/router";
 import styles from '../styles/Home.module.css';
 
+
+
 const initialState: Usuario = {
     AnioNacimiento: "",
     Apellido: "",
